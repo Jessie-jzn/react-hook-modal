@@ -2,13 +2,9 @@
 
 ## React的核心思想
 
----
-
 内存中维护一颗虚拟DOM树，数据变化时（setState），自动更新虚拟 DOM，得到一颗新树，然后 Diff 新老虚拟 DOM 树，找到有变化的部分，得到一个 Change(Patch)，将这个 Patch 加入队列，最终批量更新这些 Patch 到 DOM 中。
 
 ## React15 VS React16
-
----
 
 在react16之前的版本采用的递归的遍历方式，这种也被成为 **Stack Reconciler。**一旦任务开始进行，就**无法中断**，那么 js 将一直占用主线程，一直要等到整棵 Virtual DOM 树计算完成之后，才能把执行权交给渲染引擎，那么这就会导致一些用户交互、动画等任务无法立即得到处理，就会有卡顿，非常的影响用户体。
 
@@ -23,8 +19,6 @@
 > 
 
 ## Fiber的定义
-
----
 
 > 也称[协程](https://link.juejin.cn/?target=https%3A%2F%2Fwww.liaoxuefeng.com%2Fwiki%2F897692888725344%2F923057403198272)、或者纤程。**🔴React渲染的过程可以被中断，可以将控制权交回浏览器，让位给高优先级的任务，浏览器空闲后再恢复渲染。**
 它的特性就是**时间分片(time slicing)和暂停(supense)**
@@ -79,8 +73,6 @@ interface IdleDealine {
 - `Idle` (没有超时时间) 一些没有必要做的任务 (e.g. 比如隐藏的内容), 可能会被饿死
 
 ## Fiber相关的基础概念
-
----
 
 ### work
 
@@ -242,8 +234,6 @@ export const ShouldCapture = /*         */ 0b100000000000;
 
 ## Render阶段【遍历-收集需要变更的节点】
 
----
-
 ### 图解
 
 ![Untitled](React-Fibe%206c670/Untitled%201.png)
@@ -290,8 +280,6 @@ export const ShouldCapture = /*         */ 0b100000000000;
 - 主线程就是大脑，大脑坏了就赶紧治大脑🧠，治好了再回来治腿🦵
 
 ## Commit阶段
-
----
 
 > 需要将上阶段计算出来的需要处理的副作用一次性执行，此阶段不能暂停，否则会出现UI更新不连续的现象。此阶段需要根据`effect list`
 ，将所有更新都 commit 到DOM树上。
